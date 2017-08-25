@@ -10,8 +10,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/jiayu/s3_h560/device.mk)
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
-
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Release name
 PRODUCT_RELEASE_NAME := s3_h560
