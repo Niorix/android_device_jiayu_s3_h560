@@ -38,6 +38,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl
 
+# WiFi HIDL interfaces
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service
+
 # Camera
 PRODUCT_PACKAGES += \
      Snap \
