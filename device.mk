@@ -138,6 +138,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
        FileManager
     
+#wwi
+PRODUCT_PACKAGES += \
+    wificond
+
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
