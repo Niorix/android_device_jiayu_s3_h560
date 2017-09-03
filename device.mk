@@ -216,10 +216,6 @@ PRODUCT_PACKAGES += com.android.future.usb.accessory
 PRODUCT_PACKAGES += \
     libxlog 
 
-# IO Scheduler
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.io.scheduler=zen
-
 # Properties
 	PRODUCT_PROPERTY_OVERRIDES += \
 	    ro.sys.fw.dex2oat_thread_count=4
