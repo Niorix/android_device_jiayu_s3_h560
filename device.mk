@@ -156,7 +156,8 @@ PRODUCT_PACKAGES += \
     
 #wwi
 PRODUCT_PACKAGES += \
-    wificond
+    wificond \
+    wifilogd
 
 # NFC
 PRODUCT_PACKAGES += \
