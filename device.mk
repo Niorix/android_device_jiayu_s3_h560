@@ -88,6 +88,11 @@ PRODUCT_PACKAGES += \
     camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl
 
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-impl
+
+
 PRODUCT_PACKAGES += \
      Snap \
      libcamera_parameters_ext
