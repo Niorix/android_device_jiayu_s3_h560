@@ -71,6 +71,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl
 
+# Renderer
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
 # Camera
 PRODUCT_PACKAGES += \
      Snap \
