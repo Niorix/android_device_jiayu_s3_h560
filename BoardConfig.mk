@@ -3,6 +3,9 @@ LOCAL_PATH := device/jiayu/s3_h560
 
 include vendor/mad/config/board.mk
 
+# USE CLANG
+USE_CLANG_PLATFORM_BUILD := true
+
 # Platform
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOARD_PLATFORM := mt6752
