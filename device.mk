@@ -153,10 +153,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/.thermal_policy_01:system/etc/.tp/.thermal_policy_01 \
 	$(LOCAL_PATH)/configs/thermal.off.conf:system/etc/.tp/thermal.off.conf
 
-# Doze
-PRODUCT_PACKAGES += \
-     MeizuDoze
-
 PRODUCT_PACKAGES += \
      libGLES_android
 
