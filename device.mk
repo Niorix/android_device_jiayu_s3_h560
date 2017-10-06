@@ -33,11 +33,13 @@ PRODUCT_PACKAGES += \
 
 # Sensors HIDL interfaces
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service
 
 # Lights HIDL interfaces
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service
 
 # WiFi HIDL interfaces
 PRODUCT_PACKAGES += \
