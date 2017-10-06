@@ -122,10 +122,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
          $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf
 
-# Media
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/camera/camerasize.xml:system/etc/camerasize.xml \
-
 # HIDL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
