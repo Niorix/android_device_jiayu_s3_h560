@@ -227,8 +227,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     charger \
     charger_res_images \
-    libnl_2 \
-    libion
+
+PRODUCT_PACKAGES += \
+    libemoji \
+    libnl_2
+
+# MTK Helpers
+PRODUCT_PACKAGES += \
+    libion \
+    libwvmsym \
+    libiodev
 
 # LiveDisplay
 PRODUCT_PACKAGES += libjni_livedisplay
