@@ -144,6 +144,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
          $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf
 
+# GPS force mode
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.force.gps.mode=gnss
+
 # HIDL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
