@@ -24,7 +24,8 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 # NFC HAL
 PRODUCT_PACKAGES += \
@@ -58,7 +59,7 @@ PRODUCT_PACKAGES += \
 # Audio HIDL interfaces
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
-    android.hardware.audio.effect@2.0-impl
+    android.hardware.audio.effect@2.0-impl \
     android.hardware.audio@2.0-service
 
 # Display HIDL interfaces
