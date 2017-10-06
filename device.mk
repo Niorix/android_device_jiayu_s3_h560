@@ -98,6 +98,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl
 
+# FM Radio
+PRODUCT_PACKAGES += \
+    android.hardware.broadcastradio@1.0-impl \
+    FMRadio \
+    libfmjni
+
 # Camera HAL
 PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
