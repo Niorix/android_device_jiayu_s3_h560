@@ -111,9 +111,6 @@ BOARD_MEDIATEK_USES_GPS:=true
 # LightHAL
 TARGET_PROVIDES_LIBLIGHT := true
 BOARD_GPS_LIBRARIES:=true
-#ril
-BOARD_RIL_CLASS := ../../../device/jiayu/s3_h560/ril
-BOARD_CONNECTIVITY_MODULE := conn_soc
 
 #dt2w
 TARGET_TAP_TO_WAKE_NODE := /sys/devices/bus.2/11007000.I2C0/i2c-0/0-0020/gesture
