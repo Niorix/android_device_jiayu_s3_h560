@@ -118,6 +118,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
      libccci_util
 
+# gps
+PRODUCT_COPY_FILES += \
+         $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf
+
 # Media
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/camera/camerasize.xml:system/etc/camerasize.xml \
@@ -147,11 +151,9 @@ PRODUCT_COPY_FILES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/.ht120.mtc:system/etc/.tp/.ht120.mtc \
-	$(LOCAL_PATH)/configs/thermal.conf:system/etc/.tp/thermal.conf \
-	$(LOCAL_PATH)/configs/.thermal_policy_00:system/etc/.tp/.thermal_policy_00 \
-	$(LOCAL_PATH)/configs/.thermal_policy_01:system/etc/.tp/.thermal_policy_01 \
-	$(LOCAL_PATH)/configs/thermal.off.conf:system/etc/.tp/thermal.off.conf
+    $(LOCAL_PATH)/configs/thermal/.ht120.mtc:system/vendor/etc/.tp/.ht120.mtc \
+    $(LOCAL_PATH)/configs/thermal/thermal.conf:system/vendor/etc/.tp/thermal.conf \
+    $(LOCAL_PATH)/configs/thermal/thermal.off.conf:system/vendor/etc/.tp/thermal.off.conf
 
 PRODUCT_PACKAGES += \
      libGLES_android
@@ -184,8 +186,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=MediaTekRIL \
     ro.telephony.ril.config=fakeiccid \
     ro.com.android.mobiledata=false \
-    persist.service.acm.enable=0 \
-    ro.config.low_ram=false
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
@@ -195,6 +195,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     power.default \
     power.mt6752
+
+# Extended Filesystem Support
+TARGET_KERNEL_HAVE_EXFAT := true
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -237,22 +240,9 @@ PRODUCT_PACKAGES += libjni_livedisplay
 # USB
 PRODUCT_PACKAGES += com.android.future.usb.accessory
 
-# xlog
-PRODUCT_PACKAGES += \
-    libxlog 
-
-# Properties
-	PRODUCT_PROPERTY_OVERRIDES += \
-	    ro.sys.fw.dex2oat_thread_count=4
-
-#Dex2oat Limits
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.boot-dex2oat-threads=8 \
-    dalvik.vm.dex2oat-threads=6 \
-    dalvik.vm.image-dex2oat-threads=8
 
 # Force linking shim
-LINKER_FORCED_SHIM_LIBS := /system/lib/libmedia.so|libshim_snd.so:/system/lib64/libmedia.so|libshim_snd.so:/system/lib/liblog.so|libshim_xlog.so:/system/lib64/liblog.so|libshim_xlog.so:/system/lib/libui.so|libshim_ui.so:/system/lib64/libui.so|libshim_ui.so:/system/lib/libgui.so|libshim_gui.so:/system/lib64/libgui.so|libshim_gui.so:/system/bin/mtk_agpsd|libshim_agps.so
+LINKER_FORCED_SHIM_LIBS := /system/lib/libmedia.so|libshim_snd.so:/system/lib64/libmedia.so|libshim_snd.so:/system/lib/liblog.so|libshim_xlog.so:/system/lib64/liblog.so|libshim_xlog.so:/system/lib/libui.so|libshim_ui.so:/system/lib64/libui.so|libshim_ui.so:/system/lib/libgui.so|libshim_gui.so:/system/lib64/libgui.so|libshim_gui.so:/system/vendor/bin/mtk_agpsd|libshim_agps.so
 
 # Basic apps
 PRODUCT_PACKAGES += \

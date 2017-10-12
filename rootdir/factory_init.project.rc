@@ -1,21 +1,21 @@
 mkdir /data/misc/sensors 0664 system system
 
-service msensord /system/bin/msensord
+service msensord /system/vendor/bin/msensord
     user system
     group system
     oneshot
 
-service akmd8963 /system/bin/akmd8963
+service akmd09911 /system/vendor/bin/akmd09911
     disabled
     user system
     group system
 
-service orientationd /system/bin/orientationd
+service orientationd /system/vendor/bin/orientationd
     disabled
     user system
     group system input
 
-service geomagneticd /system/bin/geomagneticd
+service geomagneticd /system/vendor/bin/geomagneticd
     disabled
     user system
     group system input
@@ -60,12 +60,12 @@ on boot
 # Connectivity related services (Begin)
 #
 
-service wmt_loader /system/bin/wmt_loader
+service wmt_loader /system/vendor/bin/wmt_loader
     user root
     group root
     oneshot
     
-service 66xx_launcher /system/bin/6620_launcher -m 4 -p /system/etc/firmware/
+service 66xx_launcher /system/vendor/bin/6620_launcher -m 4 -p /system/etc/firmware/
     user system
     group system
     

@@ -97,6 +97,9 @@ TARGET_CPU_MEMCPY_OPT_DISABLE := true
 # Fix video autoscaling on old OMX decoders
 TARGET_OMX_LEGACY_RESCALING:=true
 
+# Extended Filesystem Support
+TARGET_KERNEL_HAVE_EXFAT := true
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_MTK := true
 #BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
@@ -145,9 +148,6 @@ MALLOC_SVELTE := true
 
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
-#dexpreopt
-WITH_DEXPREOPT := true
-WITH_DEXPREOPT_PIC := true
 
 WITH_ROOT_METHOD = magisk
 # Seccomp filter
