@@ -32,7 +32,6 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
     gui/mtk_gui.cpp \
-    gui/SensorManager.cpp
 
 LOCAL_SHARED_LIBRARIES := libbinder libgui liblog libui libutils
 LOCAL_MODULE := libshim_gui
