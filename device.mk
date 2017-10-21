@@ -148,9 +148,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.force.gps.mode=gnss
 
-# HIDL
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
