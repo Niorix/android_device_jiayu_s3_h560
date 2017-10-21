@@ -7,9 +7,7 @@
   <remove-project name="LineageOS/android_frameworks_native" />
   <remove-project name="LineageOS/android_frameworks_av" />
   <remove-project name="LineageOS/android_bionic" />
-  <remove-project name="LineageOS/android_hardware_libhardware" />
 
-  <project path="hardware/libhardware" name="sandstranger/android_hardware_libhardware_mtk" groups="pdk" />
   <project path="external/stlport" name="LineageOS/android_external_stlport" revision="lineage-15.0" />
   <project path="packages/resources/devicesettings" name="LineageOS/android_packages_resources_devicesettings" revision="lineage-15.0" />
   <project path="bionic" name="sandstranger/android_bionic_mtk" groups="pdk" />
