@@ -35,56 +35,13 @@ on post-fs
     
     mkdir /protect_s/properties 0770 system system
 
+    mkdir /cache/logs 0775 system log
+    start persistentLogging
+
     # Workaround for old nvram blobs
     mkdir /dev/block/platform/mtk-msdc.0/by-name 0755 root system
     symlink /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/nvram /dev/block/platform/mtk-msdc.0/by-name/nvram
     symlink /dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/proinfo /dev/block/platform/mtk-msdc.0/by-name/proinfo
-
-    # Wifi
-    mknod /dev/wmtWifi c 153 0
-    chmod 0660 /dev/wmtWifi
-    chown system system /dev/wmtWifi
-
-    mknod /dev/stpwmt c 190 0
-    mknod /dev/stpgps c 191 0
-    mknod /dev/stpbt c 192 0
-
-    # BT
-    chmod 0660 /dev/stpbt
-    chown radio bluetooth /dev/stpbt
-
-    chmod 0660 /dev/stpwmt
-    chown system system /dev/stpwmt
-
-    chmod 0660 /dev/wmtdetect
-    chown system system /dev/wmtdetect
-
-    restorecon /dev/wmtWifi
-    restorecon /dev/stpwmt
-    restorecon /dev/stpbt
-    restorecon /dev/stpgps
-
-    # GPS
-    chmod 0660 /dev/gps
-    chown system gps /dev/gps
-    chmod 0660 /dev/stpgps
-    chown gps gps /dev/stpgps
-
-    #change permission for engineer mode
-    chown radio system /proc/clkmgr/pll_test
-    chown radio system /proc/clkmgr/pll_fsel
-    chmod 0664 /proc/clkmgr/pll_test
-    chmod 0664 /proc/clkmgr/pll_fsel
-    #change permission for engineer mode
-    chown radio system /proc/freqhopping/dramc
-    chown radio system /proc/freqhopping/dumpregs
-    chown radio system /proc/freqhopping/freqhopping_debug
-    chown radio system /proc/freqhopping/status
-    chown radio system /proc/freqhopping/userdef
-
-    # NFC
-    chmod 0660 /dev/mt6605
-    chown radio nfc /dev/mt6605
 
 on late-fs
     # boot time fs tune
@@ -94,12 +51,13 @@ on late-fs
     write /sys/block/mmcblk0/queue/nr_requests 256
 
 on post-fs-data
-    mkdir /data/nvram 0771 system camera
-    mkdir /data/nvram/APCFG 0770 system camera
-    mkdir /data/nvram/APCFG/APRDCL 0770 system camera
-    mkdir /data/nvram/APCFG/APRDEB 0770 system camera
+    mkdir /data/nvram 0771 root camera
+    mkdir /data/nvram/APCFG 0770 root camera
+    mkdir /data/nvram/APCFG/APRDCL 0770 root camera
+    mkdir /data/nvram/APCFG/APRDEB 0770 root camera
 
-    restorecon_recursive /data/nvram
+    # Set SELinux security contexts on upgrade or policy update.
+    restorecon /data/nvram
 
     # rfkill
     chmod 0660 /dev/rfkill
@@ -610,178 +568,13 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/nr_requests 128
     write /sys/block/mmcblk0/queue/iostats 1
 
-on property:vold.decrypt=trigger_reset_main
-    start stop_modem
-
-on property:vold.decrypt=trigger_restart_min_framework
-    start start_modem
-    start msensord
-    start permission_check
-
-on property:vold.decrypt=trigger_restart_framework
-    start nvram_daemon
-    start start_modem
-    start msensord
-    start permission_check
-
-on property:vold.decrypt=trigger_shutdown_framework
-    start stop_modem
-
-service stop_modem /system/bin/md_ctrl 0
-    class main
-    disabled
-    oneshot
-
-service start_modem /system/bin/md_ctrl 1
-    class main
-    disabled
-    oneshot
-
-
-service nvram_daemon /system/vendor/bin/nvram_daemon
-    class main
-    user root
-    group system
-    oneshot
-
-service pq /system/vendor/bin/pq
-    class main
-    user system
-    group system graphics
-    oneshot
-
-#
-# MTK Wi-Fi related services (Begin)
-#
-
-# monitor property and power on/off wlan
-on property:wlan.driver.status=ok
-    write /dev/wmtWifi "1"
-
-on property:wlan.driver.status=unloaded
-    write /dev/wmtWifi "0"
-
-service wpa_supplicant /system/bin/wpa_supplicant \
-    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-    -I/system/etc/wifi/wpa_supplicant_overlay.conf -N \
-    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -e/data/misc/wifi/entropy.bin -dd \
-    -I/system/etc/wifi/p2p_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets -g@android:wpa_wlan0
-    #   we will start as root and wpa_supplicant will switch to user wifi
-    #   after setting up the capabilities required for WEXT
-    #   user wifi
-    #   group wifi inet keystore
-    class main
-    socket wpa_wlan0 dgram 660 wifi wifi
-    disabled
-    oneshot
-
-# For WiFi High Speed calibration
-service autokd /system/vendor/bin/autokd
-    class core
-    user system
-    group system
-
-#
-# MTK Wi-Fi related services (End)
-#
-
-# GPS
-service agpsd /system/vendor/bin/mtk_agpsd
-    class main
-    socket agpsd stream 660 gps system
-    socket agpsd2 stream 660 gps inet
-    socket agpsd3 stream 660 gps inet
-    user gps
-    group gps radio inet sdcard_r sdcard_rw misc system
-
-service wifi2agps /system/vendor/bin/wifi2agps
-    class main
-    user wifi
-    group gps inet
-
-service mnld /system/vendor/bin/mnld
-    class main
-    user gps
-    group gps inet misc sdcard_rw sdcard_r media_rw system
-    socket mnld stream 660 gps system
-
-#
-#sensor service (begin)
-#
-
-service msensord /system/vendor/bin/msensord
-    class main
-    oneshot
-
-service qmc6983d /system/vendor/bin/qmc6983d
-    oneshot
-    disabled
-    user system
-    group system
-    class main
-
-#
-#sensor service (end)
-#
-
-#
-#emsvr service (start)
-#
-on property:ro.build.type=eng
-    start emsvr
-
-on property:ro.build.type=user
-    start emsvr_user
-
-on property:ro.build.type=userdebug
-    start emsvr_user
-
-service emsvr_user /system/vendor/bin/em_svr
-    disabled
-    user system
-    group system radio diag
-
-service emsvr /system/vendor/bin/em_svr
-    disabled
-    user root
-
-service fuelgauged /system/vendor/bin/fuelgauged
-     class main
-     user system
-     group system
-
-#
-#emsvr service (end)
-#
-
-# Thermal
-service thermal_manager /system/vendor/bin/thermal_manager
-    class main
-    user root
-    group system
-    oneshot
-
-service wmt_loader /system/vendor/bin/wmt_loader
-    class core
-    user root
-    group root
-    oneshot
-
-service 66xx_launcher /system/vendor/bin/6620_launcher -m 4 -p /system/etc/firmware/
-    user system
-    group system
-    class core
-
-# Proximity sensor calibration
-service ps_calibrate /system/bin/meizupshelper c
-    class main
-    user root
-    group root
-    oneshot
 
 # Charger
-service charger /sbin/healthd -c
+service charger /charger
     class charger
-    critical
-    seclabel u:r:healthd:s0
+    seclabel u:r:charger:s0
+
+service persistentLogging /system/bin/logcat -r 2048 -n 9 -v threadTime -f /cache/logs/log
+    user system
+    group system log
+    disabled
