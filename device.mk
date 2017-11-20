@@ -182,7 +182,7 @@ PRODUCT_PACKAGES += \
 
 # file manager
 PRODUCT_PACKAGES += \
-       libgui_ext
+       gui_ext
     
 #wwi
 PRODUCT_PACKAGES += \
