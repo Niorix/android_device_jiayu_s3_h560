@@ -199,12 +199,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
 
-# RIL
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.android.checkjni=0 \
-    ro.telephony.ril_class=MediaTekRIL \
-    ro.telephony.ril.config=fakeiccid \
-    ro.com.android.mobiledata=false \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
@@ -296,27 +290,6 @@ PRODUCT_PACKAGES += \
     libshim_snd \
     libshim_ui \
     libshim_xlog
-
-# Add for ANT+
-ifeq ($(strip $(MTK_ANT_SUPPORT)), yes)
-
-BOARD_ANT_WIRELESS_DEVICE :="vfs-prerelease"
-
-      PRODUCT_PACKAGES += com.dsi.ant.antradio_library \
-                          AntHalService \
-                          ANT_RAM_CODE_E1.BIN \
-                          ANT_RAM_CODE_E2.BIN
-                          
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ANT/prebuild/libantradio32.so:system/lib/libantradio.so \
-    $(LOCAL_PATH)/ANT/prebuild/libantradio64.so:system/lib64/libantradio.so \
-    $(LOCAL_PATH)/ANT/prebuild/antradio_app:system/xbin/antradio_app
-
-PRODUCT_COPY_FILES += \
-    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
-
-endif
-
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
