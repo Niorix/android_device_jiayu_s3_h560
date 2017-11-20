@@ -43,7 +43,7 @@ on post-fs
     # Wifi
     mknod /dev/wmtWifi c 153 0
     chmod 0660 /dev/wmtWifi
-    chown wifi wifi /dev/wmtWifi
+    chown system system /dev/wmtWifi
 
     mknod /dev/stpwmt c 190 0
     mknod /dev/stpgps c 191 0
@@ -57,7 +57,7 @@ on post-fs
     chown system system /dev/stpwmt
 
     chmod 0660 /dev/wmtdetect
-    chown wifi wifi /dev/wmtdetect
+    chown system system /dev/wmtdetect
 
     restorecon /dev/wmtWifi
     restorecon /dev/stpwmt
@@ -774,7 +774,7 @@ service thermal_manager /system/vendor/bin/thermal_manager
 service wmt_loader /system/vendor/bin/wmt_loader
     class core
     user root
-    group root system wifi
+    group root
     oneshot
 
 service 66xx_launcher /system/vendor/bin/6620_launcher -m 4 -p /system/etc/firmware/
