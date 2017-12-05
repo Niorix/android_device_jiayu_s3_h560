@@ -103,8 +103,8 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
 
 # Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl
+#PRODUCT_PACKAGES += \
+ #   android.hardware.power@1.0-impl
 
 # FM Radio
 PRODUCT_PACKAGES += \
@@ -281,15 +281,6 @@ PRODUCT_PACKAGES += \
 #opengl
 PRODUCT_PACKAGES += \
     libGLES_android
-
-# Mtk symbols & shim
-PRODUCT_PACKAGES += \
-    libshim_agps \
-    libshim_asc \
-    libshim_gui \
-    libshim_snd \
-    libshim_ui \
-    libshim_xlog
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
