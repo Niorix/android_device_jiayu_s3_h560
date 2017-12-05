@@ -203,12 +203,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
 
-
-# Power
-PRODUCT_PACKAGES += \
-    power.default \
-    power.mt6752
-
 # Extended Filesystem Support
 TARGET_KERNEL_HAVE_EXFAT := true
 
