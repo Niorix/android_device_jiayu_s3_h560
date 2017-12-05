@@ -86,8 +86,6 @@ TARGET_INCLUDE_GPS_SYMBOLS := true
 TARGET_INCLUDE_GUI_SYMBOLS := true
 #TARGET_INCLUDE_CAMERA_SYMBOLS := true
 
-include vendor/mad/config/symbols.mk
-
 # Display
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
@@ -106,8 +104,6 @@ BOARD_USES_LEGACY_MTK_AV_BLOB := true
 TARGET_HAS_LEGACY_LP_CAM := true
 USE_CAMERA_STUB := true
 TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY := libcamera_parameters_mtk
-# Power and native tap-to-wake
-TARGET_POWERHAL_VARIANT := mtk-xen0n
 
 # Disable memcpy opt (for audio libraries)
 TARGET_CPU_MEMCPY_OPT_DISABLE := true
