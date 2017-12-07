@@ -7,8 +7,6 @@ include vendor/mad/config/board.mk
 
 $(call inherit-product, $(SRC_TARGET_DIR)/vendor/mediatek/VendorConfig.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/vendor/mediatek/VendorProduct.mk)
-
 # USE CLANG
 USE_CLANG_PLATFORM_BUILD := true
 
