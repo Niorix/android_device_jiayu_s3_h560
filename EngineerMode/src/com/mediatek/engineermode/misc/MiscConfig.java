@@ -135,7 +135,7 @@ public class MiscConfig extends PreferenceActivity {
     }
 
     private void querySmsSgsValue() {
-        int subId = SubscriptionManager.getDefaultDataSubId();
+        int subId = SubscriptionManager.getDefaultDataSubscriptionId();
         Log.i("@M_" + TAG, "sub id " + subId);
         int phoneId = SubscriptionManager.getPhoneId(subId);
         Log.i("@M_" + TAG, "phone id " + phoneId);

@@ -229,8 +229,8 @@ public class GPRS extends Activity implements OnClickListener {
             mRaBtnSIM1Enabled.setVisibility(View.VISIBLE);
             mRaBtnSIM2Enabled.setVisibility(View.VISIBLE);
 
-            int defaultDataSub = SubscriptionManager.getDefaultDataSubId();
-            int defaultSim = SubscriptionManager.getSlotId(defaultDataSub);
+            int defaultDataSub = SubscriptionManager.getDefaultDataSubscriptionId();
+            int defaultSim = SubscriptionManager.getSlotIndex(defaultDataSub);
             if (defaultSim == SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
                 defaultSim = PhoneConstants.SIM_ID_1;
                 mRaBtnSIM1Enabled.toggle();
@@ -479,7 +479,7 @@ public class GPRS extends Activity implements OnClickListener {
             editor.putInt(PREF_ATTACH_MODE, ATTACH_MODE_NOT_SPECIFY);
         }
 
-        editor.putInt(PREF_ATTACH_MODE_SIM, SubscriptionManager.getSlotId(mPhone.getSubId()));
+        editor.putInt(PREF_ATTACH_MODE_SIM, SubscriptionManager.getSlotIndex(mPhone.getSubId()));
         editor.commit();
         updateAttachModeMMI();
 
