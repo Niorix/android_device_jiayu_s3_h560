@@ -185,5 +185,7 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
+    <add-resource type="bool" name="config_intrusiveBatteryLed">true</add-resource>
+    <add-resource type="integer" name="config_deviceHardwareKeys">83</add-resource>
     <integer name="config_deviceHardwareKeys">83</integer>
 </resources>
