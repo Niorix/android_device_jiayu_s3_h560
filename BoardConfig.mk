@@ -176,3 +176,10 @@ BOARD_SECCOMP_POLICY := $(LOCAL_PATH)/seccomp
 
 # Kernel OBJ WorkAround for build
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
+
+# Mediatek vendor for Oreo
+
+$(call inherit-product, $(SRC_TARGET_DIR)/vendor/mediatek/VendorConfig.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/vendor/mediatek/VendorProduct.mk)
+
