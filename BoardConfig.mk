@@ -1,12 +1,6 @@
 # mt6752 platform boardconfig
 LOCAL_PATH := device/jiayu/s3_h560
 
-include vendor/mad/config/board.mk
-
-# Mediatek vendor for Oreo
-
-$(call inherit-product, $(SRC_TARGET_DIR)/vendor/mediatek/VendorConfig.mk)
-
 # USE CLANG
 USE_CLANG_PLATFORM_BUILD := true
 
@@ -180,4 +174,13 @@ BOARD_SECCOMP_POLICY := $(LOCAL_PATH)/seccomp
 
 # Kernel OBJ WorkAround for build
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
+
+include vendor/mad/config/board.mk
+
+# Mediatek vendor for Oreo
+
+include vendor/mediatek/VendorConfig.mk
+
+include vendor/mediatek/VendorProduct.mk
+
 

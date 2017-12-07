@@ -12,8 +12,6 @@ $(call inherit-product, device/jiayu/s3_h560/device.mk)
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/vendor/mediatek/VendorProduct.mk)
-
 # Release name
 PRODUCT_RELEASE_NAME := s3_h560
 
