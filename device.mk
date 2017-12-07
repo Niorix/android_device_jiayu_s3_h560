@@ -262,7 +262,8 @@ PRODUCT_PACKAGES += \
 # Basic apps
 PRODUCT_PACKAGES += \
     Torch \
-    Snap
+    Camera2
+#    Snap
 
 #ps calibration
 PRODUCT_PACKAGES += \
