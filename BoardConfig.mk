@@ -173,10 +173,6 @@ MALLOC_SVELTE := true
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-WITH_ROOT_METHOD = magisk
-# Seccomp filter
-BOARD_SECCOMP_POLICY := $(LOCAL_PATH)/seccomp
-
 # Kernel OBJ WorkAround for build
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
 
