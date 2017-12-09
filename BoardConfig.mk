@@ -75,6 +75,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Use mke2fs instead of make_ext4fs
 TARGET_USES_MKE2FS := true
 
+#disable lineage charger
+WITH_LINEAGE_CHARGER := false
+
 # Include needed symbols
 LIBSHIM_XLOG_SYMBOLS :=true
 LIBSHIM_SND_SYMBOLS := true
