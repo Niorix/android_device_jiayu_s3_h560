@@ -286,3 +286,9 @@ $(call inherit-product, vendor/mad/config/common.mk)
 
 # Vendor
 $(call inherit-product, vendor/jiayu/s3_h560/s3_h560-vendor.mk)
+
+$(call inherit-product, vendor/mediatek/VendorConfig.mk)
+
+$(call inherit-product, vendor/mediatek/VendorProduct.mk)
+
+

@@ -1,6 +1,8 @@
 # mt6752 platform boardconfig
 LOCAL_PATH := device/jiayu/s3_h560
 
+include vendor/mad/config/board.mk
+
 # USE CLANG
 USE_CLANG_PLATFORM_BUILD := true
 
@@ -34,11 +36,14 @@ TARGET_BOOTLOADER_BOARD_NAME := mt6752
 DISABLE_ASHMEM_TRACKING := true
 BOARD_USES_MTK_HARDWARE := true
 BOARD_MTK_HARDWARE := true
+MTK_HARDWARE :=true
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 # CyanogenMod Hardware Hooks
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
+
+WITH_LINEAGE_CHARGER := false
 
 # Kernel
 TARGET_USES_64_BIT_BINDER := true
@@ -74,9 +79,6 @@ TARGET_USE_MKE2FS_FORMAT := true
 TARGET_USERIMAGES_USE_F2FS := true
 # Use mke2fs instead of make_ext4fs
 TARGET_USES_MKE2FS := true
-
-#disable lineage charger
-WITH_LINEAGE_CHARGER := false
 
 # Include needed symbols
 LIBSHIM_XLOG_SYMBOLS :=true
@@ -177,13 +179,4 @@ BOARD_SECCOMP_POLICY := $(LOCAL_PATH)/seccomp
 
 # Kernel OBJ WorkAround for build
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
-
-include vendor/mad/config/board.mk
-
-# Mediatek vendor for Oreo
-
-include vendor/mediatek/VendorConfig.mk
-
-include vendor/mediatek/VendorProduct.mk
-
 
