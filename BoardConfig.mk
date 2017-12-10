@@ -9,6 +9,9 @@ TARGET_BOARD_PLATFORM := mt6752
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_FACTORYIMAGE := true
 
+WITH_DEXPREOPT := true
+WITH_DEXPREOPT_PIC := true
+
 # CPU
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -52,6 +55,8 @@ TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
 # build old-style zip files (required for ota updater)
 BLOCK_BASED_OTA := false
 
+TARGET_USES_EARLY_SUSPEND := true
+
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 20971520
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
@@ -64,6 +69,8 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+# Use mke2fs instead of make_ext4fs
+TARGET_USES_MKE2FS := true
 
 # Include needed symbols
 TARGET_INCLUDE_XLOG_SYMBOLS := true
@@ -94,10 +101,12 @@ TARGET_CPU_MEMCPY_OPT_DISABLE := true
 # Fix video autoscaling on old OMX decoders
 TARGET_OMX_LEGACY_RESCALING:=true
 
+# Extended Filesystem Support
+TARGET_KERNEL_HAVE_EXFAT := true
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_MTK := true
-#BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
-BOARD_BLUETOOTH_BDROID_HCILP_INCLUDED := 0
+BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 BOARD_MEDIATEK_USES_GPS:=true
 # LightHAL
@@ -142,14 +151,8 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 
-#Use dlmalloc instead of jemalloc for mallocs
-MALLOC_SVELTE := true
-
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
-#dexpreopt
-WITH_DEXPREOPT := true
-WITH_DEXPREOPT_PIC := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
