@@ -554,6 +554,8 @@ on boot
     chown system system /sys/class/leds/red/trigger
     chown system system /sys/class/leds/green/trigger
     chown system system /sys/class/leds/blue/trigger
+    chmod 0660 /sys/class/leds/button-backlight/delay_on
+    chmod 0660 /sys/class/leds/button-backlight/delay_off
 
     # HMP CPU hotplug strategy
     chown system system /proc/hps/num_base_perf_serv
