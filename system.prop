@@ -6,6 +6,7 @@ ro.mtk_enable_md1=1
 ro.mtk_flight_mode_power_off_md=1
 ro.mtk_world_phone=1
 ro.mtk_rild_read_imsi=1
+ro.mtk_lte_support=1
 
 rild.libpath=/system/lib64/mtk-ril.so
 rild.libargs=-d /dev/ttyC0
