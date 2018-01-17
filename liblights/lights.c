@@ -38,6 +38,7 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
  *
+ * Copyright (C) 2018 sandstranger
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -80,7 +81,6 @@ static struct light_state_t g_notification;
 static struct light_state_t g_battery;
 static int g_backlight = 255;
 static int g_trackball = -1;
-static int g_buttons = 0;
 static int g_attention = 0;
 
 /* TRACKBALL BACKLIGHT */
@@ -137,6 +137,13 @@ char const*const KEYBOARD_FILE
 /* BUTTON BACKLIGHT */
 char const*const BUTTON_FILE
         = "/sys/class/leds/button-backlight/brightness";
+
+char const*const BUTTON_TRIGGER_FILE
+        = "/sys/class/leds/button-backlight/trigger";
+
+char const *const BUTTON_DELAY_ON_FILE = "/sys/class/leds/button-backlight/delay_on";
+char const *const BUTTON_DELAY_OFF_FILE = "/sys/class/leds/button-backlight/delay_off";
+
 
 //ALPS0804285 add for delay
 int led_wait_delay(int ms)
@@ -369,18 +376,64 @@ set_light_keyboard(struct light_device_t* dev,
     return err;
 }
 
+static int set_buttons_delay(int level, int onMS)
+{
+	static int preStatus; /* 0: off, 1: delay light, 2: full brightnetss */
+	int nowStatus;
+	int i = 0;
+
+	if (level == 0)
+		nowStatus = 0;
+	else if (onMS)
+		nowStatus = 1;
+	else
+		nowStatus = 2;
+
+	if (preStatus == nowStatus)
+		return -1;
+
+	if (nowStatus == 0)
+		write_int(BUTTON_FILE, 0);
+	else if (nowStatus == 1) {
+		write_int(BUTTON_FILE, 255); /* default full brightness */
+		write_str(BUTTON_TRIGGER_FILE, "timer");
+		while (((access(BUTTON_DELAY_OFF_FILE, F_OK) == -1) ||
+			(access(BUTTON_DELAY_OFF_FILE, R_OK|W_OK) == -1)) && i < 10) {
+			i++;
+		}
+//		write_int(BUTTON_DELAY_OFF_FILE, offMS);
+		write_int(BUTTON_DELAY_ON_FILE, onMS);
+	} else {
+		write_str(BUTTON_TRIGGER_FILE, "none");
+		write_int(BUTTON_FILE, 255); /* default full brightness */
+	}
+	preStatus = nowStatus;
+	return 0;
+}
+
+
 static int
 set_light_buttons(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-    int err = 0;
+    int onMS;
+
+    switch (state->flashMode) {
+	case LIGHT_FLASH_TIMED:
+	    onMS = state->flashOnMS;
+	    break;
+	case LIGHT_FLASH_NONE:
+	default:
+	    onMS = 0;
+	    break;
+    }
+
     int on = is_lit(state);
-    pthread_mutex_lock(&g_lock);
-    g_buttons = on;
-    err = write_int(BUTTON_FILE, on?255:0);
-    pthread_mutex_unlock(&g_lock);
-    return err;
+    set_buttons_delay (on,onMS);
+    return 0;
 }
+
+
 
 static int
 set_speaker_light_locked(struct light_device_t* dev,
